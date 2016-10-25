@@ -1,19 +1,13 @@
-function mmatch(H, i, j, seq1, seq2, simfunc) {
-  var prevres;
-  var curres;
-  var seq1cur, seq2cur;
-  var simil;
+'use strict';
 
-  prevres = H[i - 1][j - 1];
+function mmatch(h, i, j, seq1, seq2, simfunc) {
+    const prevres = h[i - 1][j - 1];
+    const seq1cur = seq1[i - 1];
+    const seq2cur = seq2[j - 1];
+    const simil = simfunc(seq1cur, seq2cur);
+    const curres = prevres + simil;
 
-  seq1cur = seq1[i - 1];
-  seq2cur = seq2[j - 1];
-
-  simil = simfunc(seq1cur, seq2cur);
-
-  curres = prevres + simil;
-
-  return curres;
+    return curres;
 }
 
 module.exports = mmatch;
