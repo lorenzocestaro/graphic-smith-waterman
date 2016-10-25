@@ -1,33 +1,33 @@
 {
-  "name": "igenius-smith-waterman",
-  "version": "1.1.0",
-  "description": "smith-waterman algorithm",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ttrfstud/smith-waterman.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ttrfstud/smith-waterman/issues"
-  },
-  "homepage": "https://github.com/ttrfstud/smith-waterman#readme",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "smith-waterman",
-    "distance"
-  ],
-  "author": "lorenzo@igenius.net",
-  "license": "ISC",
-  "devDependencies": {
-    "eslint": "^3.8.1",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^2.0.1",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.4.1"
-  }
+    "name": "igenius-smith-waterman",
+    "version": "1.1.0",
+    "description": "smith-waterman algorithm",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ttrfstud/smith-waterman.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ttrfstud/smith-waterman/issues"
+    },
+    "homepage": "https://github.com/ttrfstud/smith-waterman#readme",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "smith-waterman",
+        "distance"
+    ],
+    "author": "lorenzo@igenius.net",
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^3.8.1",
+        "eslint-config-airbnb": "^12.0.0",
+        "eslint-plugin-import": "^2.0.1",
+        "eslint-plugin-jsx-a11y": "^2.2.3",
+        "eslint-plugin-react": "^6.4.1"
+    }
 }
