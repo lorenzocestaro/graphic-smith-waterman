@@ -1,3 +1,9 @@
 smith-waterman algorithm
 ==========================
-implementation of smith-waterman algorithm, as described [here](http://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm) and [here](http://www.cmb.usc.edu/papers/msw_papers/msw-042.pdf). signature of the only exported method is _(seq1, seq2, gss, simfunc)_. seq1 and seq2 are sequence 1 and sequence 2 (must be arrays or strings). gss is gap scoring scheme - a function, which, given a deletion/insertion gap distance would produce a penalty score for that distance. its signature is _(k)_, where k is gap distance. simfunc is similarity function, which would produce a score for given symbols in sequence 1 and sequence 2. its signature is _(symb1, symb2)_, where symb1 is symbol from sequence 1 and symb2 is symbol from sequence 2. check your arguments before invoking it!
+### Personal version of the smith-waterman distance algorithm implemented by [ttrfstud](https://github.com/ttrfstud/smith-waterman).
+
+The exported method takes four arguments: `(seq1, seq2, gss, simfunc)`.
+* `seq1` - first character sequence.
+* `seq2` - second character sequence.
+* `gss` - function that takes a single argument `k`. It describes the penalty score for an in/del gap of length `k`.
+* `simfunc` - function that takes two characters as arguments. It compares characters from the input strings and computes similarity scores
