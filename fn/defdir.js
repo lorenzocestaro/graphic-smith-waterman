@@ -1,21 +1,23 @@
-var dir = require('../obj/dir');
+'use strict';
 
-function defdir(curscore, mmscore, delscore, inscore) {
-  var curdir;
+const dir = require('../obj/dir');
 
-  if (curscore === mmscore) {
-    curdir = dir.diag;
-  } else if (curscore === delscore) {
-    curdir = dir.up;
-  } else if (curscore === inscore) {
-    curdir = dir.left;
-  }
+function defDirection(cursorScore, mmScore, delScore, inScore) {
+    let cursorDirection;
 
-  if (curscore < 0) {
-    curdir = dir.none;
-  }
+    if (cursorScore === mmScore) {
+        cursorDirection = dir.diag;
+    } else if (cursorScore === delScore) {
+        cursorDirection = dir.up;
+    } else if (cursorScore === inScore) {
+        cursorDirection = dir.left;
+    }
 
-  return curdir;
+    if (cursorScore < 0) {
+        cursorDirection = dir.none;
+    }
+
+    return cursorDirection;
 }
 
-module.exports = defdir;
+module.exports = defDirection;
