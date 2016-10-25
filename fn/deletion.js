@@ -1,21 +1,20 @@
-/** gss - gap-scoring scheme **/
-function deletion(H, i, j, gss) {
-  var k;
-  var maxidx;
-  var max;
+'use strict';
 
-  max = -1;
+// gss - gap-scoring scheme
+function deletion(h, i, j, gss) {
+    let maxidx;
+    let max = -1;
 
-  for (k = i - 1; k >=0; k--) {
-    if (max < H[k][j]) {
-      max = H[k][j];
-      maxidx = k;
+    for (let k = i - 1; k >= 0; k -= 1) {
+        if (max < h[k][j]) {
+            max = h[k][j];
+            maxidx = k;
+        }
     }
-  }
 
-  max = max + gss(i - maxidx);
+    max += gss(i - maxidx);
 
-  return max;
+    return max;
 }
 
 module.exports = deletion;
