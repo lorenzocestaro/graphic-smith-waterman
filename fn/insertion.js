@@ -1,21 +1,22 @@
-/** gss - gap-scoring scheme **/
-function insertion(H, i, j, gss) {
-  var l;
-  var max;
-  var maxidx;
+'use strict';
 
-  max = -1;
+// gss - gap-scoring scheme
+function insertion(h, i, j, gss) {
+    let max;
+    let maxidx;
 
-  for (l = j - 1; l >= 0; l--) {
-    if(max < H[i][l]) {
-      max = H[i][l];
-      maxidx = l;
+    max = -1;
+
+    for (let l = j - 1; l >= 0; l -= 1) {
+        if (max < h[i][l]) {
+            max = h[i][l];
+            maxidx = l;
+        }
     }
-  } 
 
-  max = max + gss(j - maxidx);
+    max += gss(j - maxidx);
 
-  return max;
+    return max;
 }
 
 module.exports = insertion;
