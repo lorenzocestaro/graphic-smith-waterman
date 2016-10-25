@@ -1,59 +1,55 @@
-var mmatch = require('./fn/mmatch');
-var deletion = require('./fn/deletion');
-var insertion = require('./fn/insertion');
-var defdir = require('./fn/defdir');
-var restorelm = require('./fn/restorelm');
+'use strict';
 
-var dir = require('./obj/dir');
+const mmatch = require('./fn/mmatch');
+const deletion = require('./fn/deletion');
+const insertion = require('./fn/insertion');
+const defdir = require('./fn/defdir');
+const restorelm = require('./fn/restorelm');
+
+const dir = require('./obj/dir');
 
 function sw(seq1, seq2, gss, simfunc) {
-  var len1, len2;
-  var i, j;
-  var H, T;
+    const len1 = seq1.length;
+    const len2 = seq2.length;
+    const h = [];
+    const t = [];
 
-  var mmscore;
-  var delscore;
-  var inscore;
+    let mmscore = 0;
+    let delscore = 0;
+    let inscore = 0;
 
-  var longestmatch;
+    h[0] = [];
+    t[0] = [];
 
-  len1 = seq1.length;
-  len2 = seq2.length;
-
-  H = [];
-  T = [];
-  H[0] = [];
-  T[0] = [];
-
-  for (i = 0; i < len2 + 1; i++) {
-    H[0][i] = 0;
-    T[0][i] = dir.none;
-  }
-
-  for (i = 0; i < len1 + 1; i++) {
-    if (!H[i]) {
-      H[i] = [];
-      T[i] = [];
+    for (let i = 0; i < len2 + 1; i += 1) {
+        h[0][i] = 0;
+        t[0][i] = dir.none;
     }
 
-    H[i][0] = 0;
-    T[i][0] = dir.none;
-  }
+    for (let i = 0; i < len1 + 1; i += 1) {
+        if (!h[i]) {
+            h[i] = [];
+            t[i] = [];
+        }
 
-  for (i = 1; i < len1 + 1; i++) {
-    for (j = 1; j < len2 + 1; j++) {
-      mmscore = mmatch(H, i, j, seq1, seq2, simfunc);
-      delscore = deletion(H, i, j, gss);
-      inscore = insertion(H, i, j, gss);
-
-      H[i][j] = Math.max(0, mmscore, delscore, inscore);
-      T[i][j] = defdir(H[i][j], mmscore, delscore, inscore);
+        h[i][0] = 0;
+        t[i][0] = dir.none;
     }
-  }
 
-  longestmatch = restorelm(H, T);
+    for (let i = 1; i < len1 + 1; i += 1) {
+        for (let j = 1; j < len2 + 1; j += 1) {
+            mmscore = mmatch(h, i, j, seq1, seq2, simfunc);
+            delscore = deletion(h, i, j, gss);
+            inscore = insertion(h, i, j, gss);
 
-  return longestmatch;
+            h[i][j] = Math.max(0, mmscore, delscore, inscore);
+            t[i][j] = defdir(h[i][j], mmscore, delscore, inscore);
+        }
+    }
+
+    const longestmatch = restorelm(h, t);
+
+    return longestmatch;
 }
 
 module.exports = sw;
