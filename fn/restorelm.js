@@ -1,51 +1,46 @@
-var dir = require('../obj/dir');
+'use strict';
 
-function restorelm(H, T) {
-  var len1, len2;
-  var i, j;
-  var max;
-  var maxi, maxj;
+const dir = require('../obj/dir');
 
-  var walk;
+function restorelm(h, t) {
+    const len1 = h.length;
+    const len2 = h[0].length;
+    const walk = [];
+    let max = -1;
+    let maxi;
+    let maxj;
 
-  max = -1;
-
-  len1 = H.length;
-  len2 = H[0].length;
-
-  walk = [];
-
-  for (i = 0; i < len1; i++) {
-    for (j = 0; j < len2; j++) {
-      if (max < H[i][j]) {
-        max = H[i][j];
-        maxi = i;
-        maxj = j;
-      }
+    for (let i = 0; i < len1; i += 1) {
+        for (let j = 0; j < len2; j += 1) {
+            if (max < h[i][j]) {
+                max = h[i][j];
+                maxi = i;
+                maxj = j;
+            }
+        }
     }
-  }
 
 
-  for (i = maxi, j = maxj; H[i][j];) {
-    walk.push({ i: i - 1, j: j - 1 });
+    for (let i = maxi, j = maxj; h[i][j];) {
+        walk.push({ i: i - 1, j: j - 1 });
 
-    switch(T[i][j]) {
-      case dir.diag:
-        i--;
-        j--;
-        break;
-      case dir.left:
-        j--;
-        break;
-      case dir.up:
-        i--;
-        break;
-      default:
-        break;
+        switch (t[i][j]) {
+            case dir.diag:
+                i -= 1;
+                j -= 1;
+                break;
+            case dir.left:
+                j -= 1;
+                break;
+            case dir.up:
+                i -= 1;
+                break;
+            default:
+                break;
+        }
     }
-  }
 
-  return walk;
+    return walk;
 }
 
 module.exports = restorelm;
