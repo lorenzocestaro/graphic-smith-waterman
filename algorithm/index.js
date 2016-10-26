@@ -1,11 +1,11 @@
 'use strict';
 
-const defdir = require('./fn/defdir');
-const deletion = require('./fn/deletion');
-const dir = require('./obj/dir');
-const insertion = require('./fn/insertion');
-const mmatch = require('./fn/mmatch');
-const restorelm = require('./fn/restorelm');
+const defdir = require('./defdir');
+const deletion = require('./deletion');
+const dir = require('../obj/dir');
+const insertion = require('./insertion');
+const mmatch = require('./mmatch');
+const restorelm = require('./restorelm');
 
 function sw(seq1, seq2, gss, simfunc) {
     const len1 = seq1.length;

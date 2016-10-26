@@ -1,9 +1,18 @@
 'use strict';
 
-const sw = require('./algorithm');
-const align = require('./alignment');
+const align = require('./alignment').align;
+const compute = require('./algorithm');
+const score = require('./alignment').score;
+
+console.log(align(
+    'thisisanexample',
+    'thisisoneexample',
+    (k) => -Math.pow(k, 2),
+    (a, b) => (a === b) ? 2 : -1
+));
 
 module.exports = {
     align: align,
-    sw: sw
+    compute: compute,
+    score: score
 };
