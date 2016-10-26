@@ -1,19 +1,27 @@
-Smith-Waterman Algorithm
-### Personal version of the smith-waterman distance algorithm implemented by [ttrfstud](https://github.com/ttrfstud/smith-waterman).
-==========================
+### Smith-Waterman Algorithm
 
-### Foreword
+###### *Personal version of the smith-waterman distance algorithm implemented by [ttrfstud](https://github.com/ttrfstud/smith-waterman).*
+---
+
+> ***N.B.: This codebase is still written in synchronous javascript!***
+> ***All the methods will be refactored to the relative asynchronous versions in the near future.***
+
+1. [Foreword](#foreword)
+2. [Getting started](#getting-started)
+3. [Optimum local alignment](#score-matrix-and-optimum-local-alignment)
+4. [Graphic alignment](#graphic-alignment)
+5. [Distance scoring](#distance-scoring)
+
+#### Foreword
 The [Smith-Waterman](https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm) algorithm is primarily used for local alignment of string sequences from biological datasources (DNA, RNA, protein). Anyhow, I personally implemented this algorithm, with good outcomes, for scoring the distance of user inputs from an array of predefined standards and perform further operation on the basis of the results.
 
 If you intend to use this code to compare text strings you will need to preprocess your data in order to remove spaces. Punctuation does not compromise the alignment, so it is not strictly necessary to remove it.
 
-***N.B.: This codebase does not comply with asynchronous javascript standards yet. All the methods will be refactored to the relative asynchronous versions in the near future.***
-
-### Getting started
+#### Getting started
 To get started include the package in your project and import it like so:
 `const sw = require('<path_to_index.js>')`
 
-### Score matrix and coordinates for alignment reconstruction
+#### Score matrix and optimum local alignment
 `sw.run(seq1, seq2, gss, simfunc)` is the main method. It takes four arguments:
 * `seq1` - first character sequence.
 * `seq2` - second character sequence.
@@ -21,7 +29,7 @@ To get started include the package in your project and import it like so:
 * `simfunc` - function that takes two characters as arguments. It compares characters from the input strings and computes similarity scores.
 The methods returns the coordinate walk (of the distance score matrix) representing the optimum local alignment of the two input sequences.
 
-### Graphic alignment
+#### Graphic alignment
 `sw.align(str1, str2, gss, sim) wraps the method `sw.run()`, it takes the same arguments as `sw.run()` and returns an object containing the string aligned relatively to each other. Dashes (`-`) are used to represent insertion/deletions. The function adds on the basic `sw.run()` by using the coordinate walk to reconstruct a graphic alignment of the sequences.
 The method returns an object structured like so:
 ``` javascript
@@ -50,5 +58,5 @@ The method returns an object structured like so:
 }
 ```
 
-### Distance scoring
-`sw.score(alignment, gapScore, mutationScore)` is a methods that allows to compute a naive distance score among the two sequences. The required arguments are an alignment (the return object from `sw.align()`) and score values for insertions/deletions and mutations respectively.
+#### Distance scoring
+`sw.score(alignment, gapScore, mutationScore)` is a methods that allows to compute a naive distance score among the two sequences. The required arguments are `alignment` (the return object from `sw.align()`) and `gapScore`/`mutationScore` values for scoring insertions/deletions and mutations respectively.
