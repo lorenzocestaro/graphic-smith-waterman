@@ -3,8 +3,7 @@
 ###### *Personal version of the smith-waterman distance algorithm implemented by [ttrfstud](https://github.com/ttrfstud/smith-waterman).*
 ---
 
-> ***N.B.: This codebase is still written in synchronous javascript!***
-> ***All the methods will be refactored to the relative asynchronous versions in the near future.***
+> ***N.B.: This codebase is still written in synchronous javascript! Needs to be refactored***
 
 1. [Foreword](#foreword)
 2. [Getting started](#getting-started)
@@ -30,7 +29,7 @@ To get started include the package in your project and import it like so:
 The methods returns the coordinate walk (of the distance score matrix) representing the optimum local alignment of the two input sequences.
 
 #### Graphic alignment
-`sw.align(str1, str2, gss, sim) wraps the method `sw.run()`, it takes the same arguments as `sw.run()` and returns an object containing the string aligned relatively to each other. Dashes (`-`) are used to represent insertion/deletions. The function adds on the basic `sw.run()` by using the coordinate walk to reconstruct a graphic alignment of the sequences.
+`sw.align(str1, str2, gss, sim)` wraps the method `sw.run()`, it takes the same arguments as `sw.run()` and returns an object containing the string aligned relatively to each other. Dashes (`-`) are used to represent insertion/deletions. The function adds on the basic `sw.run()` by using the coordinate walk to reconstruct a graphic alignment of the sequences.
 The method returns an object structured like so:
 ``` javascript
 {
