@@ -3,8 +3,6 @@
 ###### *Personal version of the smith-waterman distance algorithm implemented by [ttrfstud](https://github.com/ttrfstud/smith-waterman).*
 ---
 
-> ***N.B.: This codebase is still written in synchronous javascript! Needs to be refactored***
-
 1. [Foreword](#foreword)
 2. [Getting started](#getting-started)
 3. [Optimum local alignment](#score-matrix-and-optimum-local-alignment)
