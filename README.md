@@ -25,8 +25,12 @@ To get started include the package in your project and import it like so:
 * `gss` - function that takes a single argument `k`. It describes the penalty score for an in/del gap of length `k`.
 * `simfunc` - function that takes two characters as arguments. It compares characters from the input strings and computes similarity scores.
 
-Here is a basic example of similarity function:
+Here is a basic example of the two parameter functions function:
 ```javascript
+/* Gap score */
+const gss = (i) => -i;
+
+/* Similarity scores */
 function simfunc(a, b) {
   if (a === b) {
     return 2;
