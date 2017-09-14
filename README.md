@@ -24,7 +24,19 @@ To get started include the package in your project and import it like so:
 * `seq2` - second character sequence.
 * `gss` - function that takes a single argument `k`. It describes the penalty score for an in/del gap of length `k`.
 * `simfunc` - function that takes two characters as arguments. It compares characters from the input strings and computes similarity scores.
-The methods returns the coordinate walk (of the distance score matrix) representing the optimum local alignment of the two input sequences.
+
+Here is a basic example of similarity function:
+```javascript
+function simfunc(a, b) {
+  if (a === b) {
+    return 2;
+  }
+  return -1;
+};
+
+```
+
+The methods return the coordinate walk (of the distance score matrix) representing the optimum local alignment of the two input sequences.
 
 #### Graphic alignment
 `sw.align(str1, str2, gss, sim)` wraps the method `sw.run()`, it takes the same arguments as `sw.run()` and returns an object containing the string aligned relatively to each other. Dashes (`-`) are used to represent insertion/deletions. The function adds on the basic `sw.run()` by using the coordinate walk to reconstruct a graphic alignment of the sequences.
