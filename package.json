@@ -1,6 +1,6 @@
 {
   "name": "graphic-smith-waterman",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "smith-waterman algorithm",
   "main": "index.js",
   "repository": {
