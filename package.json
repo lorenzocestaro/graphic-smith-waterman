@@ -5,12 +5,12 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LorenzoCestaro/igenius-smith-waterman.git"
+    "url": "git+https://github.com/LorenzoCestaro/graphic-smith-waterman.git"
   },
   "bugs": {
-    "url": "https://github.com/LorenzoCestaro/igenius-smith-waterman"
+    "url": "https://github.com/LorenzoCestaro/graphic-smith-waterman"
   },
-  "homepage": "https://github.com/LorenzoCestaro/igenius-smith-waterman#readme",
+  "homepage": "https://github.com/LorenzoCestaro/graphic-smith-waterman#readme",
   "directories": {
     "test": "test"
   },
