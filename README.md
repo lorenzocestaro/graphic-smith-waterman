@@ -15,8 +15,14 @@ The [Smith-Waterman](https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algori
 If you intend to use this code to compare text strings you will need to preprocess your data in order to remove spaces. Punctuation does not compromise the alignment, so it is not strictly necessary to remove it.
 
 #### Getting started
-To get started include the package in your project and import it like so:
-`const sw = require('<path_to_index.js>')`
+To get started install the package from npm:
+```bash
+$ npm install graphic-smith-waterman
+```
+Import the package like so:
+```javascript
+const sw = require('graphic-smith-waterman')
+```
 
 #### Score matrix and optimum local alignment
 `sw.run(seq1, seq2, gss, simfunc)` is the main method. It takes four arguments:
