@@ -1,6 +1,7 @@
 ### Smith-Waterman Algorithm
 
-###### *Personal version of the smith-waterman distance algorithm implemented by [ttrfstud](https://github.com/ttrfstud/smith-waterman).*
+###### *Smith-Waterman algorithm with graphic string alignment.*
+###### *Forked from [ttrfstud](https://github.com/ttrfstud/smith-waterman).*
 ---
 
 1. [Foreword](#foreword)
