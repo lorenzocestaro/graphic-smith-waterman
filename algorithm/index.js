@@ -2,7 +2,7 @@
 
 const defdir = require('./defdir');
 const deletion = require('./deletion');
-const dir = require('../obj/dir');
+const dir = require('../directions');
 const insertion = require('./insertion');
 const mmatch = require('./mmatch');
 const restorelm = require('./restorelm');

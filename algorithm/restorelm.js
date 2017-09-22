@@ -1,6 +1,6 @@
 'use strict';
 
-const dir = require('../obj/dir');
+const dir = require('../directions');
 
 function restorelm(h, t) {
     const len1 = h.length;

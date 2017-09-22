@@ -1,6 +1,6 @@
 'use strict';
 
-const dir = require('../obj/dir');
+const dir = require('../directions');
 
 function defDirection(cursorScore, mmScore, delScore, inScore) {
     let cursorDirection;
