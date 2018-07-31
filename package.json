@@ -1,6 +1,6 @@
 {
   "name": "graphic-smith-waterman",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Smith-Waterman algorithm with graphical alignment.",
   "author": "Lorenzo Cestaro",
   "license": "MIT",
