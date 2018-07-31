@@ -1,10 +1,10 @@
 'use strict';
 
-const { align, score } = require('./alignment');
-const compute = require('./algorithm');
+const { align, score } = require('./src/alignment');
+const compute = require('./src/algorithm');
 
 module.exports = {
-    align: align,
-    compute: compute,
-    score: score
+    align,
+    compute,
+    score,
 };
