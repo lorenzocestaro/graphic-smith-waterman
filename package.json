@@ -1,8 +1,15 @@
 {
   "name": "graphic-smith-waterman",
   "version": "1.0.1",
-  "description": "smith-waterman algorithm",
-  "main": "index.js",
+  "description": "Smith-Waterman algorithm with graphical alignment.",
+  "author": "Lorenzo Cestaro",
+  "license": "MIT",
+  "keywords": [
+    "smith-waterman",
+    "distance",
+    "graphic",
+    "sequence alignment"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LorenzoCestaro/graphic-smith-waterman.git"
@@ -14,17 +21,10 @@
   "directories": {
     "test": "test"
   },
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "smith-waterman",
-    "distance",
-    "graphic",
-    "sequence alignment"
-  ],
-  "author": "lorenzo@igenius.net",
-  "license": "ISC",
   "devDependencies": {
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^12.0.0",
