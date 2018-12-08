@@ -1,35 +1,38 @@
 {
-  "name": "graphic-smith-waterman",
-  "version": "1.0.3",
-  "description": "Smith-Waterman algorithm with graphical alignment.",
-  "author": "Lorenzo Cestaro",
-  "license": "MIT",
-  "keywords": [
-    "smith-waterman",
-    "distance",
-    "graphic",
-    "sequence alignment"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LorenzoCestaro/graphic-smith-waterman.git"
-  },
-  "bugs": {
-    "url": "https://github.com/LorenzoCestaro/graphic-smith-waterman"
-  },
-  "homepage": "https://github.com/LorenzoCestaro/graphic-smith-waterman#readme",
-  "directories": {
-    "test": "test"
-  },
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "devDependencies": {
-    "eslint": "^3.8.1",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^2.0.1",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.4.1"
-  }
+    "name": "graphic-smith-waterman",
+    "version": "1.0.3",
+    "description": "Smith-Waterman algorithm with graphical alignment.",
+    "author": "Lorenzo Cestaro",
+    "license": "MIT",
+    "keywords": [
+        "smith-waterman",
+        "distance",
+        "graphic",
+        "sequence alignment"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/LorenzoCestaro/graphic-smith-waterman.git"
+    },
+    "bugs": {
+        "url": "https://github.com/LorenzoCestaro/graphic-smith-waterman"
+    },
+    "homepage": "https://github.com/LorenzoCestaro/graphic-smith-waterman#readme",
+    "directories": {
+        "test": "test"
+    },
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+        "eslint": "^5.9.0",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-config-prettier": "^3.3.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jest": "^22.1.2",
+        "eslint-plugin-prettier": "^3.0.0",
+        "prettier": "1.15.3"
+    }
 }
