@@ -1,5 +1,3 @@
-'use strict';
-
 const directions = {
     none: 0,
     diag: 1,

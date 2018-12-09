@@ -1,5 +1,3 @@
-'use strict';
-
 const dir = require('../directions');
 
 function defDirection(cursorScore, mmScore, delScore, inScore) {

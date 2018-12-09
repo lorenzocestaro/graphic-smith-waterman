@@ -1,5 +1,3 @@
-'use strict';
-
 function mmatch(h, i, j, seq1, seq2, simfunc) {
     const prevres = h[i - 1][j - 1];
     const seq1cur = seq1[i - 1];

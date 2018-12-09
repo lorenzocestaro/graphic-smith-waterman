@@ -1,5 +1,3 @@
-'use strict';
-
 const defdir = require('./defdir');
 const deletion = require('./deletion');
 const dir = require('../directions');

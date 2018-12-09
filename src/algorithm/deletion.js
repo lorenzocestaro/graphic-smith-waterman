@@ -1,5 +1,3 @@
-'use strict';
-
 // gss - gap-scoring scheme
 function deletion(h, i, j, gss) {
     let maxidx;

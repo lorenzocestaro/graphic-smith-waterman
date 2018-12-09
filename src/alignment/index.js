@@ -1,5 +1,3 @@
-'use strict';
-
 const align = require('./align');
 const score = require('./score');
 

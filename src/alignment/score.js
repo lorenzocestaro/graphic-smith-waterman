@@ -1,5 +1,3 @@
-'use strict';
-
 function score(alignment, gapScore, mutationScore) {
     const str1 = alignment.str1.split('');
     const str2 = alignment.str2.split('');

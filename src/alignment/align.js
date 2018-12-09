@@ -1,5 +1,3 @@
-'use strict';
-
 const sw = require('../algorithm');
 
 function align(str1, str2, gss, sim) {

@@ -1,5 +1,3 @@
-'use strict';
-
 // gss - gap-scoring scheme
 function insertion(h, i, j, gss) {
     let max;
