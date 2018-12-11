@@ -17,7 +17,7 @@ function* matrixIterator(matrix) {
     const { width, heigth } = shape(matrix);
     for (let row = 0; row < heigth; row += 1) {
         for (let col = 0; col < width; col += 1) {
-            yield matrix[row][col];
+            yield { value: matrix[row][col], row, col };
         }
     }
 }

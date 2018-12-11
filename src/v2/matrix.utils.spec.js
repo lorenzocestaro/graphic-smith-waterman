@@ -89,7 +89,7 @@ describe('Matrix row extraction', () => {
 describe('Matrix iterator', () => {
     it('should return a generator function', () => {
         const generator = matrixIterator(matrixFixture);
-        expect(generator.next().value).toBe(1);
+        expect(generator.next().value).toEqual({ value: 1, row: 0, col: 0 });
     });
 
     it('should work as an iterable', () => {
