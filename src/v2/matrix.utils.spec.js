@@ -2,6 +2,7 @@ const {
     createMatrix,
     extractColumn,
     extractRow,
+    findMaxNumber,
     matrixIterator,
     shape,
 } = require('./matrix.utils');
@@ -134,5 +135,15 @@ describe('Shape', () => {
         [{ width: 0, heigth: 0 }, []],
     ])('should return the matrix shape', (expectedShape, matrix) =>
         expect(shape(matrix)).toEqual(expectedShape),
+    );
+});
+
+describe('Find maximum', () => {
+    it('should return the first occurrence of the maximum value of the matrix', () => {
+        expect(findMaxNumber(matrixFixture)).toEqual({ value: 8, row: 1, col: 3 });
+    });
+    it.each([[[]], [[[], [], []]]])(
+        'should throw TypeError if the input matrix is empty',
+        input => expect(() => findMaxNumber(input)).toThrowError(TypeError)
     );
 });

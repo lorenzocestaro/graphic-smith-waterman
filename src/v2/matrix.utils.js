@@ -22,10 +22,31 @@ function* matrixIterator(matrix) {
     }
 }
 
+function findMaxNumber(matrix) {
+    let maxScore = -Infinity;
+    let maxScoreRow;
+    let maxScoreCol;
+
+    for (const { value, row, col } of matrixIterator(matrix)) {
+        if (maxScore < value) {
+            maxScore = value;
+            maxScoreRow = row;
+            maxScoreCol = col;
+        }
+    }
+
+    if (maxScore === -Infinity) {
+        throw new TypeError('The input matrix is empty or it does not contain numeric elements.')
+    }
+
+    return { value: maxScore, row: maxScoreRow, col: maxScoreCol };
+}
+
 module.exports = {
     createMatrix,
     extractColumn,
     extractRow,
+    findMaxNumber,
     matrixIterator,
     shape,
 };
