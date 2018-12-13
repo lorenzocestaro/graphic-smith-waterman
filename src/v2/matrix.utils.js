@@ -36,7 +36,7 @@ function findMaxNumber(matrix) {
     }
 
     if (maxScore === -Infinity) {
-        throw new TypeError('The input matrix is empty or it does not contain numeric elements.')
+        throw new TypeError('The input matrix is empty or it does not contain numeric elements.');
     }
 
     return { value: maxScore, row: maxScoreRow, col: maxScoreCol };

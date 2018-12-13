@@ -1,8 +1,8 @@
 const { createMatrix, extractColumn, extractRow } = require('./matrix.utils');
 const { getDirection } = require('./traceback');
 
-const defaultGapScore = (k) => -k;
-const defaultSimilarityScore = (char1, char2) => char1 === char2 ? 2 : -1;
+const defaultGapScore = k => -k;
+const defaultSimilarityScore = (char1, char2) => (char1 === char2 ? 2 : -1);
 
 function computeGapLength(sequence) {
     let max = -1;
@@ -33,19 +33,18 @@ function smithWaterman({
         for (let col = 1; col < width; col += 1) {
             const leftSequence = extractRow({ matrix: scoringMatrix, row, col });
             const topSequence = extractColumn({ matrix: scoringMatrix, row, col });
-            const { max: leftMax, gapLength: leftGapLength } = computeGapLength(leftSequence.reverse());
-            const { max: topMax, gapLength: topGapLength } = computeGapLength(topSequence.reverse());
+            const { max: leftMax, gapLength: leftGapLength } = computeGapLength(
+                leftSequence.reverse(),
+            );
+            const { max: topMax, gapLength: topGapLength } = computeGapLength(
+                topSequence.reverse(),
+            );
             const similarity = similarityScoreFunction(sequence1[row - 1], sequence2[col - 1]);
             const deletionScore = topMax + gapScoreFunction(topGapLength);
             const insertionScore = leftMax + gapScoreFunction(leftGapLength);
             const mutationScore = scoringMatrix[row - 1][col - 1] + similarity;
 
-            scoringMatrix[row][col] = Math.max(
-                0,
-                mutationScore,
-                deletionScore,
-                insertionScore,
-            );
+            scoringMatrix[row][col] = Math.max(0, mutationScore, deletionScore, insertionScore);
 
             tracebackMatrix[row][col] = getDirection({
                 currentScore: scoringMatrix[row][col],
@@ -58,4 +57,4 @@ function smithWaterman({
     return { scoringMatrix, tracebackMatrix };
 }
 
-module.exports = smithWaterman
+module.exports = smithWaterman;

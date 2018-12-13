@@ -5,4 +5,4 @@ const decreaseAllByOne = (...numbers) => numbers.map(decreaseByOne);
 module.exports = {
     decreaseAllByOne,
     decreaseByOne,
-}
+};

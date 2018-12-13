@@ -142,8 +142,7 @@ describe('Find maximum', () => {
     it('should return the first occurrence of the maximum value of the matrix', () => {
         expect(findMaxNumber(matrixFixture)).toEqual({ value: 8, row: 1, col: 3 });
     });
-    it.each([[[]], [[[], [], []]]])(
-        'should throw TypeError if the input matrix is empty',
-        input => expect(() => findMaxNumber(input)).toThrowError(TypeError)
+    it.each([[[]], [[[], [], []]]])('should throw TypeError if the input matrix is empty', input =>
+        expect(() => findMaxNumber(input)).toThrowError(TypeError),
     );
 });

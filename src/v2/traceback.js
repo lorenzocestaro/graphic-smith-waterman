@@ -1,5 +1,5 @@
 const { findMaxNumber } = require('./matrix.utils');
-const { decreaseAllByOne, decreaseByOne } =require('./utils');
+const { decreaseAllByOne, decreaseByOne } = require('./utils');
 
 const directions = {
     NONE: 0,
@@ -8,7 +8,7 @@ const directions = {
     UP: 3,
 };
 
-const coordinateUpdaters = (direction) => {
+const coordinateUpdaters = direction => {
     const getters = {
         [directions.DIAGONAL]: decreaseAllByOne,
         [directions.LEFT]: (row, col) => [row, decreaseByOne(col)],
@@ -18,20 +18,15 @@ const coordinateUpdaters = (direction) => {
     return getters[direction];
 };
 
-function getDirection({
-    currentScore,
-    mutationScore,
-    insertionScore,
-    deletionScore,
-}) {
+function getDirection({ currentScore, mutationScore, insertionScore, deletionScore }) {
     if (currentScore < 0) {
         return directions.NONE;
     }
 
-     // TODO
-     // Maybe refactor: Mutation has priority and needs to be the last element
-     // of the dictionary to overwrite deletion/insertion if the score is the
-     // same.
+    // TODO
+    // Maybe refactor: Mutation has priority and needs to be the last element
+    // of the dictionary to overwrite deletion/insertion if the score is the
+    // same.
     const directionSwitch = {
         [deletionScore]: directions.UP,
         [insertionScore]: directions.LEFT,
