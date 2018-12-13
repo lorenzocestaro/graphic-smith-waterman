@@ -1,5 +1,5 @@
 const { createMatrix, extractColumn, extractRow } = require('./matrix.utils');
-const { getCoordinateWalk, getDirection } = require('./traceback');
+const { getDirection } = require('./traceback');
 
 const defaultGapScore = (k) => -k;
 const defaultSimilarityScore = (char1, char2) => char1 === char2 ? 2 : -1;
@@ -55,16 +55,7 @@ function smithWaterman({
             });
         }
     }
-    // console.log(scoringMatrix);
-    console.log(tracebackMatrix);
-    console.log();
-    const coordinateWalk = getCoordinateWalk({ scoringMatrix, tracebackMatrix });
-    console.log(coordinateWalk);
-    const { align } = require('../index');
-    align(sequence1, sequence2, gapScoreFunction, similarityScoreFunction);
+    return { scoringMatrix, tracebackMatrix };
 }
-
-smithWaterman({ sequence1: 'insertion', sequence2: 'deletion'});
-// smithWaterman({ sequence1: 'asdasdasd', sequence2: 'asdasdasda'});
 
 module.exports = smithWaterman
