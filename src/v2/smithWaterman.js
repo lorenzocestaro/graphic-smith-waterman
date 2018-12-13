@@ -1,5 +1,5 @@
 const { createMatrix, extractColumn, extractRow } = require('./matrix.utils');
-const { getDirection } = require('./traceback');
+const { getCoordinateWalk, getDirection } = require('./traceback');
 
 const defaultGapScore = (k) => -k;
 const defaultSimilarityScore = (char1, char2) => char1 === char2 ? 2 : -1;
@@ -7,13 +7,13 @@ const defaultSimilarityScore = (char1, char2) => char1 === char2 ? 2 : -1;
 function computeGapLength(sequence) {
     let max = -1;
     let gapLength = 0;
-    for (let cursor = 0; cursor < sequence.length; cursor += 1) {
+    for (let cursor = 1; cursor < sequence.length; cursor += 1) {
         if (max < sequence[cursor]) {
             max = sequence[cursor];
             gapLength = cursor;
         }
     }
-    return gapLength;
+    return { max, gapLength };
 }
 
 function smithWaterman({
@@ -23,8 +23,8 @@ function smithWaterman({
     similarityScoreFunction = defaultSimilarityScore,
 }) {
     // Create matrices for dynamic programming solution.
-    const width = sequence2.length + 1;
     const heigth = sequence1.length + 1;
+    const width = sequence2.length + 1;
     const scoringMatrix = createMatrix({ width, heigth });
     const tracebackMatrix = createMatrix({ width, heigth });
 
@@ -33,11 +33,11 @@ function smithWaterman({
         for (let col = 1; col < width; col += 1) {
             const leftSequence = extractRow({ matrix: scoringMatrix, row, col });
             const topSequence = extractColumn({ matrix: scoringMatrix, row, col });
-            const leftGapLength = computeGapLength(leftSequence.reverse());
-            const topGapLength = computeGapLength(topSequence.reverse());
-            const similarity = similarityScoreFunction(sequence1[row], sequence2[col]);
-            const deletionScore = scoringMatrix[row - 1][col] + gapScoreFunction(leftGapLength);
-            const insertionScore = scoringMatrix[row][col - 1] + gapScoreFunction(topGapLength);
+            const { max: leftMax, gapLength: leftGapLength } = computeGapLength(leftSequence.reverse());
+            const { max: topMax, gapLength: topGapLength } = computeGapLength(topSequence.reverse());
+            const similarity = similarityScoreFunction(sequence1[row - 1], sequence2[col - 1]);
+            const deletionScore = topMax + gapScoreFunction(topGapLength);
+            const insertionScore = leftMax + gapScoreFunction(leftGapLength);
             const mutationScore = scoringMatrix[row - 1][col - 1] + similarity;
 
             scoringMatrix[row][col] = Math.max(
@@ -55,11 +55,16 @@ function smithWaterman({
             });
         }
     }
-    console.log(scoringMatrix);
+    // console.log(scoringMatrix);
     console.log(tracebackMatrix);
+    console.log();
+    const coordinateWalk = getCoordinateWalk({ scoringMatrix, tracebackMatrix });
+    console.log(coordinateWalk);
+    const { align } = require('../index');
+    align(sequence1, sequence2, gapScoreFunction, similarityScoreFunction);
 }
 
-// smithWaterman({ sequence1: 'insertion', sequence2: 'deletion'});
-smithWaterman({ sequence1: 'asdasdasd', sequence2: 'asdasdasda'});
+smithWaterman({ sequence1: 'insertion', sequence2: 'deletion'});
+// smithWaterman({ sequence1: 'asdasdasd', sequence2: 'asdasdasda'});
 
 module.exports = smithWaterman
