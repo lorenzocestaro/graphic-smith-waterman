@@ -1,5 +1,5 @@
 const { createMatrix, extractColumn, extractRow } = require('./matrix.utils');
-const { getDirection } = require('./traceback');
+const { align, getTracebackDirection } = require('./traceback');
 
 const defaultGapScore = k => -k;
 const defaultSimilarityScore = (char1, char2) => (char1 === char2 ? 2 : -1);
@@ -22,7 +22,7 @@ function smithWaterman({
     gapScoreFunction = defaultGapScore,
     similarityScoreFunction = defaultSimilarityScore,
 }) {
-    // Create matrices for dynamic programming solution.
+    // Initialize matrices for dynamic programming solution.
     const heigth = sequence1.length + 1;
     const width = sequence2.length + 1;
     const scoringMatrix = createMatrix({ width, heigth });
@@ -46,7 +46,7 @@ function smithWaterman({
 
             scoringMatrix[row][col] = Math.max(0, mutationScore, deletionScore, insertionScore);
 
-            tracebackMatrix[row][col] = getDirection({
+            tracebackMatrix[row][col] = getTracebackDirection({
                 currentScore: scoringMatrix[row][col],
                 mutationScore,
                 insertionScore,
@@ -54,7 +54,12 @@ function smithWaterman({
             });
         }
     }
-    return { scoringMatrix, tracebackMatrix };
+    return tracebackMatrix;
 }
+
+const sequence1 = 'asdfgh';
+const sequence2 = 'ghjkl';
+const tracebackMatrix = smithWaterman({ sequence1, sequence2 });
+console.log(align({ sequence1, sequence2, tracebackMatrix }));
 
 module.exports = smithWaterman;

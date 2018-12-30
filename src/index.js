@@ -1,8 +1,7 @@
-const { align, score } = require('./alignment');
-const compute = require('./algorithm');
+const { align } = require('./traceback');
+const smithWaterman = require('./smithWaterman');
 
 module.exports = {
     align,
-    compute,
-    score,
+    smithWaterman,
 };

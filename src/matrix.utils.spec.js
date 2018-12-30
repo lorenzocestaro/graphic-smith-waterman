@@ -2,9 +2,6 @@ const {
     createMatrix,
     extractColumn,
     extractRow,
-    findMaxNumber,
-    matrixIterator,
-    shape,
 } = require('./matrix.utils');
 
 // prettier-ignore
@@ -85,64 +82,4 @@ describe('Matrix row extraction', () => {
         });
         expect(extractedColumn).toEqual([1, 2, 3, 4]);
     });
-});
-
-describe('Matrix iterator', () => {
-    it('should return a generator function', () => {
-        const generator = matrixIterator(matrixFixture);
-        expect(generator.next().value).toEqual({ value: 1, row: 0, col: 0 });
-    });
-
-    it('should work as an iterable', () => {
-        const mock = jest.fn();
-        const generator = matrixIterator(matrixFixture);
-        for (const item of generator) {
-            mock(item);
-        }
-        expect(mock).toHaveBeenCalledTimes(16);
-    });
-});
-
-describe('Shape', () => {
-    it.each([
-        [
-            { width: 10, heigth: 3 },
-            [
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ],
-        ],
-        [
-            { width: 3, heigth: 10 },
-            [
-                [0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0],
-            ],
-        ],
-        [{ width: 3, heigth: 3 }, [[0, 0, 0], [0, 0, 0], [0, 0, 0]]],
-        [{ width: 2, heigth: 2 }, [[0, 0], [0, 0]]],
-        [{ width: 1, heigth: 1 }, [[0]]],
-        [{ width: 1, heigth: 1 }, [['asd']]],
-        [{ width: 0, heigth: 0 }, []],
-    ])('should return the matrix shape', (expectedShape, matrix) =>
-        expect(shape(matrix)).toEqual(expectedShape),
-    );
-});
-
-describe('Find maximum', () => {
-    it('should return the first occurrence of the maximum value of the matrix', () => {
-        expect(findMaxNumber(matrixFixture)).toEqual({ value: 8, row: 1, col: 3 });
-    });
-    it.each([[[]], [[[], [], []]]])('should throw TypeError if the input matrix is empty', input =>
-        expect(() => findMaxNumber(input)).toThrowError(TypeError),
-    );
 });
