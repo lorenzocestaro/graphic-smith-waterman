@@ -1,5 +1,5 @@
 const { createMatrix, extractColumn, extractRow } = require('./matrix.utils');
-const { align, getTracebackDirection } = require('./traceback');
+const { getTracebackDirection } = require('./traceback');
 
 const defaultGapScore = k => -k;
 const defaultSimilarityScore = (char1, char2) => (char1 === char2 ? 2 : -1);
@@ -56,10 +56,5 @@ function smithWaterman({
     }
     return tracebackMatrix;
 }
-
-const sequence1 = 'asdfgh';
-const sequence2 = 'ghjkl';
-const tracebackMatrix = smithWaterman({ sequence1, sequence2 });
-console.log(align({ sequence1, sequence2, tracebackMatrix }));
 
 module.exports = smithWaterman;

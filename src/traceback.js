@@ -55,6 +55,7 @@ function align({ sequence1, sequence2, tracebackMatrix }) {
     let col = sequence2.length;
     const aligned1 = [];
     const aligned2 = [];
+    const coordinateWalk = [[row, col]];
     while (row > 0 || col > 0) {
         const direction = tracebackMatrix[row][col];
         const alignmentUpdater = alignmentUpdaters(direction);
@@ -63,8 +64,12 @@ function align({ sequence1, sequence2, tracebackMatrix }) {
         aligned2.unshift(char2)
         const coordinateUpdater = coordinateUpdaters(direction);
         [row, col] = coordinateUpdater([row, col]);
+        coordinateWalk.push([row, col]);
     }
-    return `${aligned1.join('')}\n${aligned2.join('')}`;
+    return {
+        alignment: `${aligned1.join('')}\n${aligned2.join('')}`,
+        coordinateWalk,
+    };
 }
 
 module.exports = {
