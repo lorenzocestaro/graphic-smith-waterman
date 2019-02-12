@@ -17,16 +17,13 @@ const coordinateUpdaters = direction => {
     return getters[direction];
 };
 
-const getDiagonalChars = ({ seq1, seq2, row, col }) => [
-    seq1[row-1] || '-',
-    seq2[col-1] || '-',
-]
+const getDiagonalChars = ({ seq1, seq2, row, col }) => [seq1[row - 1] || '-', seq2[col - 1] || '-'];
 
 const alignmentUpdaters = direction => {
     const updaters = {
         [directions.DIAGONAL]: getDiagonalChars,
-        [directions.LEFT]: ({ seq2, col }) => ['-', seq2[col-1]],
-        [directions.UP]: ({ seq1, row }) => [seq1[row-1], '-'],
+        [directions.LEFT]: ({ seq2, col }) => ['-', seq2[col - 1]],
+        [directions.UP]: ({ seq1, row }) => [seq1[row - 1], '-'],
         [directions.NONE]: getDiagonalChars,
     };
     return updaters[direction];
@@ -60,8 +57,8 @@ function align({ sequence1, sequence2, tracebackMatrix }) {
         const direction = tracebackMatrix[row][col];
         const alignmentUpdater = alignmentUpdaters(direction);
         const [char1, char2] = alignmentUpdater({ seq1: sequence1, seq2: sequence2, row, col });
-        aligned1.unshift(char1)
-        aligned2.unshift(char2)
+        aligned1.unshift(char1);
+        aligned2.unshift(char2);
         const coordinateUpdater = coordinateUpdaters(direction);
         [row, col] = coordinateUpdater([row, col]);
         coordinateWalk.push([row, col]);

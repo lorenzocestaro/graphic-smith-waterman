@@ -1,8 +1,4 @@
-const {
-    createMatrix,
-    extractColumn,
-    extractRow,
-} = require('./matrix.utils');
+const { createMatrix, extractColumn, extractRow } = require('./matrix.utils');
 
 // prettier-ignore
 const matrixFixture = [
