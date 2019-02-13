@@ -27,6 +27,7 @@ const SWAligner = ({
         alignedSequence2,
         coordinateWalk,
         tracebackMatrix,
+        alignment: `${alignedSequence1}\n${alignedSequence2}`,
     };
 };
 
