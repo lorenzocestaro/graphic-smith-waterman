@@ -17,14 +17,17 @@ const coordinateUpdaters = direction => {
     return getters[direction];
 };
 
-const getDiagonalChars = ({ seq1, seq2, row, col }) => [seq1[row - 1] || '-', seq2[col - 1] || '-'];
+const getDiagonalChars = gapSymbol => ({ seq1, seq2, row, col }) => [
+    seq1[row - 1] || gapSymbol,
+    seq2[col - 1] || gapSymbol,
+];
 
-const alignmentUpdaters = direction => {
+const alignmentUpdaters = gapSymbol => direction => {
     const updaters = {
-        [directions.DIAGONAL]: getDiagonalChars,
-        [directions.LEFT]: ({ seq2, col }) => ['-', seq2[col - 1]],
-        [directions.UP]: ({ seq1, row }) => [seq1[row - 1], '-'],
-        [directions.NONE]: getDiagonalChars,
+        [directions.DIAGONAL]: getDiagonalChars(gapSymbol),
+        [directions.LEFT]: ({ seq2, col }) => [gapSymbol, seq2[col - 1]],
+        [directions.UP]: ({ seq1, row }) => [seq1[row - 1], gapSymbol],
+        [directions.NONE]: getDiagonalChars(gapSymbol),
     };
     return updaters[direction];
 };
@@ -47,15 +50,16 @@ function getTracebackDirection({ currentScore, mutationScore, insertionScore, de
     return directionSwitch[currentScore] || 0;
 }
 
-function align({ sequence1, sequence2, tracebackMatrix }) {
+function align({ sequence1, sequence2, tracebackMatrix, gapSymbol }) {
     let row = sequence1.length;
     let col = sequence2.length;
     const aligned1 = [];
     const aligned2 = [];
     const coordinateWalk = [[row, col]];
+    const updaters = alignmentUpdaters(gapSymbol);
     while (row > 0 || col > 0) {
         const direction = tracebackMatrix[row][col];
-        const alignmentUpdater = alignmentUpdaters(direction);
+        const alignmentUpdater = updaters(direction);
         const [char1, char2] = alignmentUpdater({ seq1: sequence1, seq2: sequence2, row, col });
         aligned1.unshift(char1);
         aligned2.unshift(char2);
@@ -64,7 +68,8 @@ function align({ sequence1, sequence2, tracebackMatrix }) {
         coordinateWalk.push([row, col]);
     }
     return {
-        alignment: `${aligned1.join('')}\n${aligned2.join('')}`,
+        alignedSequence1: aligned1.join(''),
+        alignedSequence2: aligned2.join(''),
         coordinateWalk,
     };
 }

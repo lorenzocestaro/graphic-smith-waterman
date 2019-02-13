@@ -1,9 +1,6 @@
 const { createMatrix, extractColumn, extractRow } = require('./matrix.utils');
 const { getTracebackDirection } = require('./traceback');
 
-const defaultGapScore = k => -k;
-const defaultSimilarityScore = (char1, char2) => (char1 === char2 ? 2 : -1);
-
 function computeGapLength(sequence) {
     let max = -1;
     let gapLength = 0;
@@ -16,12 +13,7 @@ function computeGapLength(sequence) {
     return { max, gapLength };
 }
 
-function smithWaterman({
-    sequence1,
-    sequence2,
-    gapScoreFunction = defaultGapScore,
-    similarityScoreFunction = defaultSimilarityScore,
-}) {
+function smithWaterman({ sequence1, sequence2, gapScoreFunction, similarityScoreFunction }) {
     // Initialize matrices for dynamic programming solution.
     const heigth = sequence1.length + 1;
     const width = sequence2.length + 1;
