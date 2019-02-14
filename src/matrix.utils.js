@@ -1,8 +1,8 @@
 // Creates a matrix filled with zeros of the specified width and length.
-const createMatrix = ({ width, heigth }) =>
+const createMatrix = ({ width, heigth, fill = 0 }) =>
     Array(heigth)
-        .fill(0)
-        .map(() => Array(width).fill(0));
+        .fill(fill)
+        .map(() => Array(width).fill(fill));
 
 // Returns the left portion of the row specified by the supplied coordinates.
 const extractRow = ({ matrix, row, col }) => matrix[row].slice(0, col + 1);
@@ -14,8 +14,11 @@ const extractColumn = ({ matrix, row, col }) =>
         .map(_row => _row.slice(col, col + 1))
         .reduce((prev, curr) => [...prev, ...curr], []);
 
+const matrixMax = matrix => matrix.reduce((max, row) => Math.max(Math.max(...row), max), 0);
+
 module.exports = {
     createMatrix,
     extractColumn,
     extractRow,
+    matrixMax,
 };
