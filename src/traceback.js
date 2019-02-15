@@ -30,7 +30,7 @@ function traceback({ sequence1, sequence2, tracebackMatrix, startCoordinates, ga
     const aligned2 = [];
     const coordinateWalk = [[row, col]];
     const updaters = alignmentUpdaters(gapSymbol);
-    while (tracebackMatrix[row][col] > 0) {
+    while (tracebackMatrix[row][col] !== directions.NONE) {
         const direction = tracebackMatrix[row][col];
         const alignmentUpdater = updaters(direction);
         const [char1, char2] = alignmentUpdater({ seq1: sequence1, seq2: sequence2, row, col });

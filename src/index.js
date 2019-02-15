@@ -1,15 +1,18 @@
 const { traceback } = require('./traceback');
 const { reverse } = require('./utils');
+const { directions: directionsEnum } = require('./dtypes');
 const smithWaterman = require('./smithWaterman');
 
 const SWAligner = ({
     similarityScoreFunction = (char1, char2) => (char1 === char2 ? 2 : -1),
     gapScoreFunction = reverse,
+    directions = directionsEnum,
     gapSymbol = '-',
 } = {}) => ({
     similarityScoreFunction,
     gapScoreFunction,
     gapSymbol,
+    directions,
     align(sequence1, sequence2) {
         const { alignmentScore, startCoordinates, scoringMatrix, tracebackMatrix } = smithWaterman({
             sequence1,
