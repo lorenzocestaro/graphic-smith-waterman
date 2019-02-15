@@ -9,14 +9,9 @@ const coordinateUpdaters = direction => {
     return getters[direction];
 };
 
-const getDiagonalChars = gapSymbol => ({ seq1, seq2, row, col }) => [
-    seq1[row - 1] || gapSymbol,
-    seq2[col - 1] || gapSymbol,
-];
-
 const alignmentUpdaters = gapSymbol => direction => {
     const updaters = {
-        [directions.DIAGONAL]: getDiagonalChars(gapSymbol),
+        [directions.DIAGONAL]: ({ seq1, seq2, row, col }) => [seq1[row - 1], seq2[col - 1]],
         [directions.LEFT]: ({ seq2, col }) => [gapSymbol, seq2[col - 1]],
         [directions.UP]: ({ seq1, row }) => [seq1[row - 1], gapSymbol],
     };
