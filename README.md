@@ -5,7 +5,10 @@
 
 1. [Foreword](#foreword)
 2. [Getting started](#getting-started)
-3. [Usage](#usage)
+3. [SWaligner](#swaligner)
+4. [Defaults](#defaults)
+5. [Usage](#usage)
+6. [Alignment result](#alignment-result)
 
 #### Foreword
 The [Smith-Waterman](https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm)
