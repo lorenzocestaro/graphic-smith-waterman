@@ -84,12 +84,12 @@ const defaultResult = defaultAligner.align('insertion', 'deletion');
 const customResult = customAligner.align('insertion', 'deletion');
 
 console.log(defaultResult.alignment)
-// > ertio
-// > e-tio
+// > ertion
+// > e-tion
 
 console.log(customResult.alignment)
-// > inse~~rtio
-// > ~~~ele~tio
+// > inse~~rtion
+// > ~~~ele~tion
 ```
 
 #### Alignment result
