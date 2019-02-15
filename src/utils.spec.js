@@ -26,11 +26,11 @@ describe('Applied function', () => {
 describe('Decrease and rectify', () => {
     it.each([1, 2, 3, 4, 5, 10, 20, 100, 1.345])(
         'should decrement an integer greater then zero by one',
-        n => expect(decreaseAndRectify(n)).toEqual(n - 1),
+        n => expect(decreaseAndRectify(n)).toBe(n - 1),
     );
     it.each([0, -1, -2, -3, -54, -156, -89689, 0.34])(
         'should return zero if decrementing the input would return a negative number',
-        n => expect(decreaseAndRectify(n)).toEqual(0),
+        n => expect(decreaseAndRectify(n)).toBe(0),
     );
     it.each(['string', [1, 2, 3], { a: 1, b: 2 }])(
         'should raise TypeError for non number inputs',
@@ -41,7 +41,7 @@ describe('Decrease and rectify', () => {
 describe('Reverse', () => {
     it.each([0, -1, 2, -3, 54, -156, -89689, 0.34])(
         'should reverse the sign of every numeric input',
-        n => expect(reverse(n)).toEqual(-1 * n),
+        n => expect(reverse(n)).toBe(-1 * n),
     );
     it.each(['string', [1, 2, 3], { a: 1, b: 2 }])(
         'should raise TypeError for non number inputs',
