@@ -22,7 +22,8 @@
     "scripts": {
         "lint": "npx prettier -l src/**/*.js && eslint src/**",
         "prettify": "npx prettier --write src/**/*.js",
-        "test": "jest --verbose --coverage"
+        "test": "jest --verbose --coverage",
+        "coverage": "jest --collectCoverageFrom=src/**.js --coverage"
     },
     "husky": {
         "hooks": {
