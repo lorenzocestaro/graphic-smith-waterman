@@ -28,27 +28,44 @@ Import the package in your project:
 const SWaligner = require('graphic-smith-waterman')
 ```
 
-#### Usage
-`SWaligner` behaves like a factory, you can instantiate many aligners with
-different parameters and re-use each one multiple times. A single aligner is
-configurable with the following parameters:
+#### SWaligner
+`SWaligner` is a factory, you can create many aligners with different
+ parameters and re-use each one multiple times. An aligner is configurable
+ with the following parameters (all of them are optional):
 * `similarityScoreFunction`: takes two characters (string) as input and returns
 a similarity score (integer).
 * `gapScoreFunction`: takes one positive integer as input (gap length) and
 returns a score (integer).
 * `gapSymbol`: a custom character (string) used to represent gaps in the
-alignment. Defaults to `-`.
+alignment.
+* `directions`: enum object used to define direction codes for the traceback
+matrix.
 
-Here are the default function values for `similarityScoreFunction` and
-`gapScoreFunction`:
+> Tip: Higher score for gaps means means higher chances of having one inserted.
+> Generally you should choose a function that gives higher score to shorter gaps.
+
+#### Defaults
+Here are the default values for the aligner options:
 ```javascript
 const similarityScoreFunction = (char1, char2) => (char1 === char2 ? 2 : -1);
 const gapScoreFunction = k => -k;
+const gapSymbol = '-';
+const directions = Object.freeze({
+    NONE: 0,
+    DIAGONAL: 1,
+    LEFT: 2,
+    UP: 3,
+});
 ```
+Generally, you should not have the need to change the directions enum, but if
+you need to carry out operations on the traceback matrix yourself, you can
+define your custom characters, remember:
+* It is not necessary to freeze the custom directions object but it is
+recommended.
+* Do not change enum keys (i.e. `NONE`, `DIAGONAL`, `LEFT`, `UP`) or the
+algorithm will not work.
 
-Higher score for gaps means means higher chances of having one inserted.
-Generally you should choose a function that gives higher score to shorter gaps.
-
+#### Usage
 Instantiating `SWaligner` returns an aligner object which exposes an `align`
 method. `align` accepts the two strings to align as input:
 ```javascript
@@ -64,26 +81,20 @@ const defaultResult = defaultAligner.align('insertion', 'deletion');
 const customResult = customAligner.align('insertion', 'deletion');
 
 console.log(defaultResult.alignment)
-// > insertion
-// > dele-tion
+// > ertio
+// > e-tio
 
 console.log(customResult.alignment)
-// > i~nser~~tion
-// > ~d~~e~letion
+// > inse~~rtio
+// > ~~~ele~tio
 ```
 
-#### Aligner object
-The aligner object (`const aligner = SWaligner();`) has the following keys:
-* `similarityScoreFunction`: function used to compute character similarity
-scores.
-* `gapScoreFunction`: function to compute gap scores.
-* `gapSymbol`: symbol used to represents gaps in the alignment.
-* `align`: function to compute the Smith-Waterman alignment between two strings.
-
-#### Alignment object
+#### Alignment result
 The `align` method returns an object with the following properties:
-* `originalSequences List[str]`: original input sequences.
-* `alignedSequences List[str]`: aligned sequences.
-* `coordinateWalk List[List[int]]`: coordinate walk from the traceback matrix.
-* `tracebackMatrix List[List[int]]`: alignment traceback matrix.
-* `alignment [str]`: printable visual alignment string.
+* `score <int>`: alignment score.
+* `originalSequences Array<str>`: original input sequences.
+* `alignedSequences Array<str>`: locally aligned sequences.
+* `scoringMatrix Array<Array<int>>`: alignment scores matrix.
+* `tracebackMatrix Array<Array<int>>`: alignment traceback directions matrix.
+* `coordinateWalk Array<Array<int>>`: coordinate walk from the traceback matrix.
+* `alignment <str>`: printable visual alignment string.
