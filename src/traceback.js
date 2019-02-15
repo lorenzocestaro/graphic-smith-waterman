@@ -1,11 +1,10 @@
-const { apply, decreaseAndRectify } = require('./utils');
 const { directions } = require('./dtypes');
 
 const coordinateUpdaters = direction => {
     const getters = {
-        [directions.DIAGONAL]: apply(decreaseAndRectify),
-        [directions.LEFT]: ([row, col]) => [row, decreaseAndRectify(col)],
-        [directions.UP]: ([row, col]) => [decreaseAndRectify(row), col],
+        [directions.DIAGONAL]: ([row, col]) => [row - 1, col - 1],
+        [directions.LEFT]: ([row, col]) => [row, col - 1],
+        [directions.UP]: ([row, col]) => [row - 1, col],
     };
     return getters[direction];
 };
