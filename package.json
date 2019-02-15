@@ -22,7 +22,7 @@
     "scripts": {
         "lint": "npx prettier -l src/**/*.js && eslint src/**",
         "prettify": "npx prettier --write src/**/*.js",
-        "test": "jest"
+        "test": "jest --verbose --coverage"
     },
     "husky": {
         "hooks": {
