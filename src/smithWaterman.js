@@ -1,5 +1,5 @@
 const { createMatrix, extractColumn, extractRow } = require('./matrix.utils');
-const { getTracebackDirection } = require('./traceback');
+const { directions } = require('./dtypes');
 
 function computeGapLength(sequence) {
     let max = -1;
@@ -13,12 +13,17 @@ function computeGapLength(sequence) {
     return { max, gapLength };
 }
 
+const scoreReducer = (max, score) => (score.value > max.value ? score : max);
+
 function smithWaterman({ sequence1, sequence2, gapScoreFunction, similarityScoreFunction }) {
     // Initialize matrices for dynamic programming solution.
     const heigth = sequence1.length + 1;
     const width = sequence2.length + 1;
     const scoringMatrix = createMatrix({ width, heigth });
     const tracebackMatrix = createMatrix({ width, heigth });
+
+    let highestScore = 0;
+    let highestScoreCoordinates = [0, 0];
 
     // Fill the matrices.
     for (let row = 1; row < heigth; row += 1) {
@@ -32,21 +37,35 @@ function smithWaterman({ sequence1, sequence2, gapScoreFunction, similarityScore
                 topSequence.reverse(),
             );
             const similarity = similarityScoreFunction(sequence1[row - 1], sequence2[col - 1]);
-            const deletionScore = topMax + gapScoreFunction(topGapLength);
-            const insertionScore = leftMax + gapScoreFunction(leftGapLength);
-            const mutationScore = scoringMatrix[row - 1][col - 1] + similarity;
+            const scores = [
+                { value: topMax + gapScoreFunction(topGapLength), direction: directions.UP },
+                { value: leftMax + gapScoreFunction(leftGapLength), direction: directions.LEFT },
+                {
+                    value: scoringMatrix[row - 1][col - 1] + similarity,
+                    direction: directions.DIAGONAL,
+                },
+            ];
 
-            scoringMatrix[row][col] = Math.max(0, mutationScore, deletionScore, insertionScore);
-
-            tracebackMatrix[row][col] = getTracebackDirection({
-                currentScore: scoringMatrix[row][col],
-                mutationScore,
-                insertionScore,
-                deletionScore,
+            const { value: bestScore, direction } = scores.reduce(scoreReducer, {
+                value: 0,
+                direction: directions.NONE,
             });
+            scoringMatrix[row][col] = bestScore;
+            tracebackMatrix[row][col] = direction;
+
+            if (bestScore >= highestScore) {
+                highestScore = bestScore;
+                highestScoreCoordinates = [row, col];
+            }
         }
     }
-    return tracebackMatrix;
+
+    return {
+        alignmentScore: highestScore,
+        startCoordinates: highestScoreCoordinates,
+        scoringMatrix,
+        tracebackMatrix,
+    };
 }
 
 module.exports = smithWaterman;

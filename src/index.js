@@ -1,4 +1,4 @@
-const { align } = require('./traceback');
+const { traceback } = require('./traceback');
 const { reverse } = require('./utils');
 const smithWaterman = require('./smithWaterman');
 
@@ -11,22 +11,25 @@ const SWAligner = ({
     gapScoreFunction,
     gapSymbol,
     align(sequence1, sequence2) {
-        const tracebackMatrix = smithWaterman({
+        const { alignmentScore, startCoordinates, scoringMatrix, tracebackMatrix } = smithWaterman({
             sequence1,
             sequence2,
             gapScoreFunction: this.gapScoreFunction,
             similarityScoreFunction: this.similarityScoreFunction,
         });
-        const { alignedSequence1, alignedSequence2, coordinateWalk } = align({
+        const { alignedSequence1, alignedSequence2, coordinateWalk } = traceback({
             sequence1,
             sequence2,
+            startCoordinates,
             tracebackMatrix,
             gapSymbol: this.gapSymbol,
         });
         return {
+            score: alignmentScore,
             originalSequences: [sequence1, sequence2],
             alignedSequences: [alignedSequence1, alignedSequence2],
             coordinateWalk,
+            scoringMatrix,
             tracebackMatrix,
             alignment: `${alignedSequence1}\n${alignedSequence2}`,
         };
