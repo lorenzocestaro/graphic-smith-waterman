@@ -1,7 +1,7 @@
+const { directions: directionsEnum } = require('./dtypes');
+const { smithWaterman } = require('./smithWaterman');
 const { traceback } = require('./traceback');
 const { reverse } = require('./utils');
-const { directions: directionsEnum } = require('./dtypes');
-const smithWaterman = require('./smithWaterman');
 
 const SWAligner = ({
     similarityScoreFunction = (char1, char2) => (char1 === char2 ? 2 : -1),
