@@ -13,7 +13,7 @@ const SWAligner = ({
     gapScoreFunction,
     gapSymbol,
     directions,
-    align(sequence1, sequence2) {
+    align(sequence1 = '', sequence2 = '') {
         const { alignmentScore, startCoordinates, scoringMatrix, tracebackMatrix } = smithWaterman({
             sequence1,
             sequence2,
