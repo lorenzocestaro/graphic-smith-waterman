@@ -1,4 +1,4 @@
-const { createMatrix, extractColumn, extractRow, matrixMax } = require('./matrix.utils');
+const { createMatrix, extractColumn, extractRow } = require('./matrix.utils');
 
 // prettier-ignore
 const matrixFixture = [
@@ -77,11 +77,5 @@ describe('Matrix row extraction', () => {
             col: 3,
         });
         expect(extractedColumn).toEqual([1, 2, 3, 4]);
-    });
-});
-
-describe('Matrix max value extraction', () => {
-    it('should return the highest value in the matrix', () => {
-        expect(matrixMax(matrixFixture)).toBe(8);
     });
 });

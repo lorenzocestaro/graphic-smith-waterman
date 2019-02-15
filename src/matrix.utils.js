@@ -14,11 +14,8 @@ const extractColumn = ({ matrix, row, col }) =>
         .map(_row => _row.slice(col, col + 1))
         .reduce((prev, curr) => [...prev, ...curr], []);
 
-const matrixMax = matrix => matrix.reduce((max, row) => Math.max(Math.max(...row), max), 0);
-
 module.exports = {
     createMatrix,
     extractColumn,
     extractRow,
-    matrixMax,
 };
