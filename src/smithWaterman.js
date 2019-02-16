@@ -19,6 +19,34 @@ function computeGapLength(sequence) {
 // Find maximum in a list of objects with a value property.
 const scoreReducer = (max, score) => (score.value > max.value ? score : max);
 
+// Compute candidate scores to fill a certain cell of the scoring matrix.
+// Returns a list of score objects storing score value and traceback direction.
+function computeScores({ scoringMatrix, row, col, gapScoreFunction, similarityScore }) {
+    // Get left-row and top-column from the current coordinates.
+    const leftSequence = extractRow({ matrix: scoringMatrix, row, col });
+    const topSequence = extractColumn({ matrix: scoringMatrix, row, col });
+
+    // Compute left and top maximum values and gap lengths.
+    const { max: leftMax, gapLength: leftGapLength } = computeGapLength(leftSequence.reverse());
+    const { max: topMax, gapLength: topGapLength } = computeGapLength(topSequence.reverse());
+
+    // Compute scores for every type of sustitution for the current
+    // coordinates. In the scores array are computed in order:
+    //   - Deletion score.
+    //   - Insertion score.
+    //   - Mutation score.
+    // Each score is stored with the respective direction to later fill
+    // the traceback matrix.
+    return [
+        { value: topMax + gapScoreFunction(topGapLength), direction: directions.UP },
+        { value: leftMax + gapScoreFunction(leftGapLength), direction: directions.LEFT },
+        {
+            value: scoringMatrix[row - 1][col - 1] + similarityScore,
+            direction: directions.DIAGONAL,
+        },
+    ];
+}
+
 function smithWaterman({ sequence1, sequence2, gapScoreFunction, similarityScoreFunction }) {
     // Initialize matrices for dynamic programming solution.
     const heigth = sequence1.length + 1;
@@ -32,34 +60,19 @@ function smithWaterman({ sequence1, sequence2, gapScoreFunction, similarityScore
     // Fill the matrices.
     for (let row = 1; row < heigth; row += 1) {
         for (let col = 1; col < width; col += 1) {
-            // Get left-row and top-column from the current coordinates.
-            const leftSequence = extractRow({ matrix: scoringMatrix, row, col });
-            const topSequence = extractColumn({ matrix: scoringMatrix, row, col });
+            // Simlarity score of the current couple of characters in the
+            // input sequences. Subtracts 1 from matrix coordinates to account
+            // for the matrix buffer.
+            const similarityScore = similarityScoreFunction(sequence1[row - 1], sequence2[col - 1]);
 
-            // Compute left and top maimum values and gap lengths.
-            const { max: leftMax, gapLength: leftGapLength } = computeGapLength(
-                leftSequence.reverse(),
-            );
-            const { max: topMax, gapLength: topGapLength } = computeGapLength(
-                topSequence.reverse(),
-            );
-
-            // Compute scores for every type of sustitution for the current
-            // coordinates. In the scores array are computed in order:
-            //   - Deletion score.
-            //   - Insertion score.
-            //   - Mutation score.
-            // Each score is stored with the respective direction to later fill
-            // the traceback matrix.
-            const similarity = similarityScoreFunction(sequence1[row - 1], sequence2[col - 1]);
-            const scores = [
-                { value: topMax + gapScoreFunction(topGapLength), direction: directions.UP },
-                { value: leftMax + gapScoreFunction(leftGapLength), direction: directions.LEFT },
-                {
-                    value: scoringMatrix[row - 1][col - 1] + similarity,
-                    direction: directions.DIAGONAL,
-                },
-            ];
+            // Candidate scores to fill the current matrix cell.
+            const scores = computeScores({
+                scoringMatrix,
+                row,
+                col,
+                gapScoreFunction,
+                similarityScore,
+            });
 
             // Select highest scoring substitution and fill the matrices.
             const { value: bestScore, direction } = scores.reduce(scoreReducer, {
