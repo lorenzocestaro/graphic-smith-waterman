@@ -4,7 +4,8 @@
 ---
 
 [![Build Status](https://travis-ci.org/lorenzocestaro/graphic-smith-waterman.svg?branch=master)](https://travis-ci.org/lorenzocestaro/graphic-smith-waterman)
-[![Maintainability](https://api.codeclimate.com/v1/badges/4bec5c1aedbcfe7329938ff85ce7bda94b0af7d8dc06bfa98ee6910833b4c24a/maintainability)](https://codeclimate.com/github/lorenzocestaro/graphic-smith-waterman/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/1e71505ebaff9557852d/test_coverage)](https://codeclimate.com/github/lorenzocestaro/graphic-smith-waterman/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1e71505ebaff9557852d/maintainability)](https://codeclimate.com/github/lorenzocestaro/graphic-smith-waterman/maintainability)
 [![npm version](https://badge.fury.io/js/graphic-smith-waterman.svg)](https://badge.fury.io/js/graphic-smith-waterman)
 
 1. [Foreword](#foreword)
