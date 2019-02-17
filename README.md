@@ -49,8 +49,9 @@ alignment.
 * `directions`: enum object used to define direction codes for the traceback
 matrix.
 
-> Tip: Higher score for gaps means means higher chances of having one inserted.
-> Generally you should choose a function that gives higher score to shorter gaps.
+> _Tip: Higher scores for gaps means higher chances of having one inserted.
+> Generally you should choose a function that gives higher scores to shorter
+> gaps._
 
 #### Defaults
 Here are the default values for the aligner options:
