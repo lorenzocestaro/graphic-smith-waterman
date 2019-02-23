@@ -1,6 +1,12 @@
 ### Smith-Waterman Algorithm
 
-###### *Smith-Waterman algorithm with graphic string alignment.*
+> :information_source: Important communication :information_source:
+>
+> Dear users, I have included this codebase in a new and updated package called
+> [seqalign](https://github.com/lorenzocestaro/seqalign). It aims to become a
+> collection of sequence alignment algorithms. For now it includes  Smith-Waterman
+> and Needleman-Wunsch and I plan on expanding it in the future.
+
 ---
 
 [![Build Status](https://travis-ci.org/lorenzocestaro/graphic-smith-waterman.svg?branch=master)](https://travis-ci.org/lorenzocestaro/graphic-smith-waterman)
