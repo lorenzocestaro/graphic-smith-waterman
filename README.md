@@ -10,7 +10,7 @@
 ---
 
 [![Build Status](https://travis-ci.org/lorenzocestaro/graphic-smith-waterman.svg?branch=master)](https://travis-ci.org/lorenzocestaro/graphic-smith-waterman)
-[[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1e71505ebaff9557852d/maintainability)](https://codeclimate.com/github/lorenzocestaro/graphic-smith-waterman/maintainability)
 [![npm version](https://badge.fury.io/js/graphic-smith-waterman.svg)](https://badge.fury.io/js/graphic-smith-waterman)
 
