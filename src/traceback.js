@@ -1,6 +1,6 @@
 const { directions } = require('./dtypes');
 
-const coordinateUpdaters = direction => {
+const coordinateUpdaters = (direction) => {
     const getters = {
         [directions.DIAGONAL]: ([row, col]) => [row - 1, col - 1],
         [directions.LEFT]: ([row, col]) => [row, col - 1],
@@ -9,7 +9,7 @@ const coordinateUpdaters = direction => {
     return getters[direction];
 };
 
-const alignmentUpdaters = gapSymbol => direction => {
+const alignmentUpdaters = (gapSymbol) => (direction) => {
     const updaters = {
         [directions.DIAGONAL]: ({ seq1, seq2, row, col }) => [seq1[row - 1], seq2[col - 1]],
         [directions.LEFT]: ({ seq2, col }) => [gapSymbol, seq2[col - 1]],

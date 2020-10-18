@@ -24,12 +24,18 @@ describe('Applied function', () => {
 });
 
 describe('Reverse', () => {
-    it.each([0, -1, 2, -3, 54, -156, -89689, 0.34])(
-        'should reverse the sign of every numeric input',
-        n => expect(reverse(n)).toBe(-1 * n),
-    );
+    it.each([
+        0,
+        -1,
+        2,
+        -3,
+        54,
+        -156,
+        -89689,
+        0.34,
+    ])('should reverse the sign of every numeric input', (n) => expect(reverse(n)).toBe(-1 * n));
     it.each(['string', [1, 2, 3], { a: 1, b: 2 }])(
         'should raise TypeError for non number inputs',
-        n => expect(() => reverse(n)).toThrowError(TypeError),
+        (n) => expect(() => reverse(n)).toThrowError(TypeError),
     );
 });
